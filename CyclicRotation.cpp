@@ -32,6 +32,7 @@ void rotate(int a[], int n)
     temp=a[i];
     a[i]=a[i-1];
     a[i-1]=temp;                   //swaping the value of array element consecutively in descending order
+    i--;
   }
   
   a[0]=t;                         //atlast assigning the value of t to a[0]
