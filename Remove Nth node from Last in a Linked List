@@ -1,0 +1,46 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode* p = head;
+        ListNode* t;
+        int size = 0;
+        //counting the size of the linked List
+        while(p != NULL)
+        {
+            size++;
+            p = p->next;
+        }
+        //now if the size of the linkedlist is 1 and n is equal to 1 then we will simply    printout null
+        if(size == 1 && n == 1) return NULL;
+     
+        
+        int target = size - n + 1;   //defining the target which is the node number from first whereas node no from last is given.
+        if(target  == 1) return head->next;//target is equal to 1 that means we have to delete the node no 1 , hence we will simply print out the next list nodes
+        int temp = 1;
+        p = head;
+        
+        // now if the target is not 1 then we have to traverse the list until we get the target node
+        while( temp != target - 1)
+        {
+            p = p->next;
+            temp++;
+        }
+        t = p->next; // storing address of target into a temporary node t
+        p->next = t->next; //linking the address between predecessor and successor nodes of t
+        t->next = NULL; 
+        delete t; // delete the temporary node t
+        
+        
+        return head;
+    }
+};
